@@ -184,6 +184,9 @@ if %license%==none (
   echo Make sure to edit the LICENSE file to replace [year] and [name]!
 )
 echo # %name% >README.md
+echo This project currently lacks a description >>README.md
+echo. >>README.md
+echo Generated using mkproj >>README.md
 mkdir src target
 echo target/* >.gitignore
 exit /b 0
