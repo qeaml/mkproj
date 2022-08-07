@@ -7,7 +7,7 @@ if %1.==. (
   echo Project type options:
   echo.  /c       - Generate a C/C++ project
   echo.  /py      - Generate a Python project
-  echo.  /hs      - Generate a JavaScript project
+  echo.  /js      - Generate a JavaScript project
   echo.  If none of the above are specified, a generic project is created.
   echo. 
   echo Language-specific options:

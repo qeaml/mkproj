@@ -12,6 +12,7 @@ Usage: mkproj [options] <project name>
 Project type options:
   /c       - Generate a C/C++ project
   /py      - Generate a Python project
+  /js      - Generate a JavaScript project
   If none of the above are specified, a generic project is created.
 
 Language-specific options:
