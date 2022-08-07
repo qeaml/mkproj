@@ -37,7 +37,7 @@ Miscellaneous options:
 
 Some of these options may be provided by a config.txt file located in (ProgramData)\qeaml\mkproj
 Your config.txt is located at:
-C:\ProgramData\qeaml\mkproj\config.txt
+C:\Users\...\AppData\Roaming\qeaml\mkproj\config.txt
 
 You are using mkproj v1.0
 

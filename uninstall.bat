@@ -11,7 +11,7 @@ if %confirm%==y (
 )
 
 del /f/q %SystemRoot%\mkproj.bat
-rmdir /s/q %ProgramData%\qeaml\mkproj
+rmdir /s/q %AppData%\qeaml\mkproj
 
 :Terminate
 endlocal

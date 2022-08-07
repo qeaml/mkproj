@@ -10,7 +10,7 @@ if %confirm%==y (
   goto :Terminate
 )
 
-set data=%ProgramData%\qeaml\mkproj
+set data=%AppData%\qeaml\mkproj
 
 copy /y mkproj.bat %SystemRoot%
 mkdir %data%

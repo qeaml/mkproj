@@ -35,7 +35,7 @@ if %1.==. (
   echo. 
   echo Some of these options may be provided by a config.txt file located in ^(ProgramData^)\qeaml\mkproj
   echo Your config.txt is located at:
-  echo %ProgramData%\qeaml\mkproj\config.txt
+  echo %AppData%\qeaml\mkproj\config.txt
   echo. 
   echo You are using mkproj v1.0
   echo.
@@ -59,8 +59,8 @@ set npm=yes
 set build=none
 
 @REM Load default settings
-if exist %ProgramData%\qeaml\mkproj\config.txt (
-for /f "eol=# tokens=*" %%l in (%ProgramData%\qeaml\mkproj\config.txt) do (
+if exist %AppData%\qeaml\mkproj\config.txt (
+for /f "eol=# tokens=*" %%l in (%AppData%\qeaml\mkproj\config.txt) do (
   for /f "tokens=1 delims==" %%k in ("%%l") do (
   for /f "tokens=2 delims==" %%v in ("%%l") do (
     if %%k==editor (
@@ -180,7 +180,7 @@ cd %name%
 if %license%==none (
   echo.
 ) else (
-  copy %ProgramData%\qeaml\mkproj\licenses\%license%.txt .\LICENSE >NUL
+  copy %AppData%\qeaml\mkproj\licenses\%license%.txt .\LICENSE >NUL
   echo Make sure to edit the LICENSE file to replace [year] and [name]!
 )
 echo # %name% >README.md
@@ -199,7 +199,7 @@ mkdir include
 if %build%==none (
   echo.
 ) else (
-  copy %ProgramData%\qeaml\mkproj\scripts\c\build-%build%.bat .\build.bat >NUL
+  copy %AppData%\qeaml\mkproj\scripts\c\build-%build%.bat .\build.bat >NUL
   echo If you intended on using the provided build script, make sure to create a build.txt file to tell it what to build!
 )
 exit /b 0
