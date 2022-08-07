@@ -7,11 +7,14 @@ if %1.==. (
   echo Project type options:
   echo.  /c       - Generate a C/C++ project
   echo.  /py      - Generate a Python project
+  echo.  /hs      - Generate a JavaScript project
   echo.  If none of the above are specified, a generic project is created.
   echo. 
   echo Language-specific options:
   echo.  Python:
   echo.    /novenv - Do not create a virtual environment
+  echo.  JavaScript:
+  echo.    /nonpm - Do not initialise a NPM package for the project
   echo.  C:
   echo.    /cl    - Use cl.exe build script
   echo.    /clang - Use clang build script
@@ -52,6 +55,7 @@ set force=no
 set verbose=no
 
 set venv=yes
+set npm=yes
 set build=none
 
 @REM Load default settings
@@ -76,6 +80,8 @@ for %%a in (%*) do (
     set type=C
   ) else if %%a==/py (
     set type=Python
+  ) else if %%a==/js (
+    set type=JS
   
   @REM Git-related
   ) else if %%a==/nogit (
@@ -84,6 +90,8 @@ for %%a in (%*) do (
   @REM Language-specific
   ) else if %%a==/novenv (
     set venv=no
+  ) else if %%a==/nonpm (
+    set npm=no
   ) else if %%a==/cl (
     set build=cl
   ) else if %%a==/clang (
@@ -199,6 +207,13 @@ if %venv%==yes (
   echo Creating virtual environment. This may take a couple seconds.
   py -m venv venv
   echo Done.
+)
+exit /b 0
+
+:MakeJS
+if %npm%==yes (
+  echo node_modules/* >>.gitignore
+  npm init
 )
 exit /b 0
 
