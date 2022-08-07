@@ -10,9 +10,18 @@ if %confirm%==y (
   goto :Terminate
 )
 
+set copy=yes
+for %%a in (%*) do (
+  if %%a==/nocopy (
+    set copy=no
+  )
+)
+
 set data=%AppData%\qeaml\mkproj
 
-copy /y mkproj.bat %SystemRoot%
+if %copy%==yes (
+  copy /y mkproj.bat %SystemRoot%
+)
 mkdir %data%
 echo # Enter your configuration here >%data%\config.txt
 mkdir %data%\licenses
