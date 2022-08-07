@@ -44,6 +44,20 @@ You are using mkproj v1.0
 
 ```
 
+## Configuration
+
+mkproj will use some defaults provided by the `%AppData%\qeaml\mkproj\config.txt`
+file. Below is an example file with explanations:
+
+```ini
+# editor - The editor to use by default. This can be any executable that can
+#          accept a directory as an argument. In this example that's VSCodium.
+editor=codium
+# license - The license to use by default. This has to be one of the provided
+#           licenses (from the licensed directory)
+license=bsd3
+```
+
 ## Build Scripts
 
 When using the `/cl`, `/clang` or `/gcc` option, a `build.bat` file is copied
