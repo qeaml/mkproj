@@ -110,7 +110,7 @@ for %%a in (%*) do (
     set edit=yes
   ) else if %%a==/force (
     set force=yes
-  ) else if %%a==/verbose (
+  ) else if %%a==/v (
     set verbose=yes
   
   @REM Editors
@@ -180,12 +180,11 @@ cd %name%
 if %license%==none (
   echo.
 ) else (
-  set licensepath=%AppData%\qeaml\mkproj\licenses\%license%.txt
-  if exist %licensepath% (
-    copy %licensepath% .\LICENSE >NUL
+  if exist %AppData%\qeaml\mkproj\licenses\%license%.txt (
+    copy %AppData%\qeaml\mkproj\licenses\%license%.txt .\LICENSE >NUL
     echo Make sure to edit the LICENSE file to replace [year] and [name]!
   ) else (
-    echo An inexistent license (%license%) has been specified. Not creating the LICENSE file.
+    echo An inexistent license ^(%license%^) has been specified. Not creating the LICENSE file.
   )
 )
 echo # %name% >README.md
