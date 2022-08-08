@@ -32,6 +32,7 @@ if %1.==. (
   echo Miscellaneous options:
   echo.  /force   - Override existing project on name conflict
   echo.  /verbose - Print additional information
+  echo.  /update  - Check for updates
   echo. 
   echo Some of these options may be provided by a config.txt file located in ^(ProgramData^)\qeaml\mkproj
   echo Your config.txt is located at:
@@ -40,6 +41,24 @@ if %1.==. (
   echo You are using mkproj v1.0
   echo.
   goto :Terminate
+)
+
+set outdated=no
+for /f %%l in ('curl -f -s https://raw.githubusercontent.com/qeaml/mkproj/main/VERSION') do (
+  for /f "tokens=1 delims=." %%v in ("%%l") do (
+    if %%v GTR 1 (
+      set outdated=yes
+    )
+  )
+  for /f "tokens=2 delims=." %%v in ("%%l") do (
+    if %%v GTR 0 (
+      set outdated=yes
+    )
+)
+)
+
+if %outdated%==yes (
+  echo A newer version of mkproj is available. Check https://github.com/qeaml/mkproj.
 )
 
 set name=
@@ -53,6 +72,7 @@ set edit=no
 
 set force=no
 set verbose=no
+set update=no
 
 set venv=yes
 set npm=yes
@@ -112,6 +132,8 @@ for %%a in (%*) do (
     set force=yes
   ) else if %%a==/v (
     set verbose=yes
+  ) else if %%a==/update (
+    set update=yes
   
   @REM Editors
   ) else if %%a==/codium (
@@ -135,6 +157,7 @@ if %verbose%==yes (
   echo Create Git repository? %git%
   echo Edit after creating? %edit%
   echo Editor: %editor%
+  echo Check for updates? %update%
   if %type%==Python (
     echo Create venv? %venv%
   )
@@ -152,6 +175,26 @@ if %name%.==. (
 if %type%.==. (
   echo No project type was specified. Using default.
   set type=Generic
+)
+
+if %update%==yes (
+  set outdated=no
+  for /f %%l in ('curl -f -s https://raw.githubusercontent.com/qeaml/mkproj/main/VERSION') do (
+    for /f "tokens=1 delims=." %%v in ("%%l") do (
+      if %%v GTR 1 (
+        set outdated=yes
+      )
+    )
+    for /f "tokens=2 delims=." %%v in ("%%l") do (
+      if %%v GTR 0 (
+        set outdated=yes
+      )
+  )
+  )
+
+  if %outdated%==yes (
+    echo A newer version of mkproj is available. Check https://github.com/qeaml/mkproj.
+  )
 )
 
 if exist %name% (
