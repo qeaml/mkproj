@@ -30,11 +30,11 @@ if %1.==. (
   echo.  If none of the above are specified, no LICENSE file is created.
   echo. 
   echo Miscellaneous options:
-  echo.  /force   - Override existing project on name conflict
-  echo.  /verbose - Print additional information
-  echo.  /update  - Check for updates
+  echo.  /force  - Override existing project on name conflict
+  echo.  /v      - Print additional information
+  echo.  /update - Check for updates
   echo. 
-  echo Some of these options may be provided by a config.txt file located in ^(ProgramData^)\qeaml\mkproj
+  echo Some of these options may be provided by a config.txt file located in AppData\qeaml\mkproj
   echo Your config.txt is located at:
   echo %AppData%\qeaml\mkproj\config.txt
   echo. 

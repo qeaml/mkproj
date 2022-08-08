@@ -18,6 +18,8 @@ Project type options:
 Language-specific options:
   Python:
     /novenv - Do not create a virtual environment
+  JavaScript:
+    /nonpm - Do not initialise a NPM package for the project
   C:
     /cl    - Use cl.exe build script
     /clang - Use clang build script
@@ -33,12 +35,13 @@ License-related options:
   If none of the above are specified, no LICENSE file is created.
 
 Miscellaneous options:
-  /force   - Override existing project on name conflict
-  /verbose - Print additional information
+  /force  - Override existing project on name conflict
+  /v      - Print additional information
+  /update - Check for updates
 
-Some of these options may be provided by a config.txt file located in (ProgramData)\qeaml\mkproj
+Some of these options may be provided by a config.txt file located in AppData\qeaml\mkproj
 Your config.txt is located at:
-C:\Users\...\AppData\Roaming\qeaml\mkproj\config.txt
+C:\Users\USER\AppData\Roaming\qeaml\mkproj\config.txt
 
 You are using mkproj v1.0
 
