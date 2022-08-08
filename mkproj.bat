@@ -158,6 +158,7 @@ if %type%.==. (
 )
 
 if %verbose%==yes (
+  echo ----------------------------------------
   echo Project Information
   echo ----------------------------------------
   echo Name: %name%
@@ -208,18 +209,14 @@ if exist %name% (
   )
 )
 
-call :Base
-call :Make%type%
-call :Finish
-goto :Terminate
-
-:Base
 if %git%==yes (
   git init %name% >NUL
 ) else (
   mkdir %name%
 )
+
 cd %name%
+
 if %license%==none (
   echo.
 ) else (
@@ -230,13 +227,19 @@ if %license%==none (
     echo An inexistent license ^(%license%^) has been specified. Not creating the LICENSE file.
   )
 )
+
 echo # %name% >README.md
 echo This project currently lacks a description >>README.md
 echo. >>README.md
 echo Generated using mkproj >>README.md
+
 mkdir src target
+
 echo target/* >.gitignore
-exit /b 0
+
+call :Make%type%
+
+goto :Finish
 
 :MakeGeneric
 exit /b 0
@@ -275,13 +278,6 @@ if %edit%==yes (
     %editor% .
   )
 )
-exit /b 0
-
-:Log
-if %verbose%==yes (
-  echo %~1
-)
-exit /b 0
 
 :Terminate
 endlocal
