@@ -147,6 +147,16 @@ for %%a in (%*) do (
   )
 )
 
+if %name%.==. (
+  echo No project name was specified. Terminating.
+  goto :Terminate
+)
+
+if %type%.==. (
+  echo No project type was specified. Using default.
+  set type=Generic
+)
+
 if %verbose%==yes (
   echo Project Information
   echo ----------------------------------------
@@ -165,16 +175,6 @@ if %verbose%==yes (
     echo Build script: %build%
   )
   echo ----------------------------------------
-)
-
-if %name%.==. (
-  echo No project name was specified. Terminating.
-  goto :Terminate
-)
-
-if %type%.==. (
-  echo No project type was specified. Using default.
-  set type=Generic
 )
 
 if %update%==yes (
