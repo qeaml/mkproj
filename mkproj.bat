@@ -169,23 +169,7 @@ if %verbose%==yes (
 )
 
 if %update%==yes (
-  set outdated=no
-  for /f %%l in ('curl -f -s https://raw.githubusercontent.com/qeaml/mkproj/main/VERSION') do (
-    for /f "tokens=1 delims=." %%v in ("%%l") do (
-      if %%v GTR 1 (
-        set outdated=yes
-      )
-    )
-    for /f "tokens=2 delims=." %%v in ("%%l") do (
-      if %%v GTR 0 (
-        set outdated=yes
-      )
-  )
-  )
-
-  if %outdated%==yes (
-    echo A newer version of mkproj is available. Check https://github.com/qeaml/mkproj.
-  )
+  call :CheckUpdate
 )
 
 if exist %name% (
@@ -258,6 +242,27 @@ if %npm%==yes (
   echo node_modules/* >>.gitignore
   npm init
 )
+exit /b 0
+
+:CheckUpdate
+set outdated=no
+for /f %%l in ('curl -f -s https://raw.githubusercontent.com/qeaml/mkproj/main/VERSION') do (
+  for /f "tokens=1 delims=." %%v in ("%%l") do (
+    if %%v GTR 1 (
+      set outdated=yes
+    )
+  )
+  for /f "tokens=2 delims=." %%v in ("%%l") do (
+    if %%v GTR 0 (
+      set outdated=yes
+    )
+)
+)
+
+if %outdated%==yes (
+  echo A newer version of mkproj is available. Check https://github.com/qeaml/mkproj.
+)
+
 exit /b 0
 
 :Finish
