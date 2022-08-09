@@ -43,24 +43,6 @@ if %1.==. (
   goto :Terminate
 )
 
-set outdated=no
-for /f %%l in ('curl -f -s https://raw.githubusercontent.com/qeaml/mkproj/main/VERSION') do (
-  for /f "tokens=1 delims=." %%v in ("%%l") do (
-    if %%v GTR 1 (
-      set outdated=yes
-    )
-  )
-  for /f "tokens=2 delims=." %%v in ("%%l") do (
-    if %%v GTR 0 (
-      set outdated=yes
-    )
-)
-)
-
-if %outdated%==yes (
-  echo A newer version of mkproj is available. Check https://github.com/qeaml/mkproj.
-)
-
 set name=
 set type=
 
