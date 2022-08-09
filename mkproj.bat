@@ -4,6 +4,9 @@ setlocal
 if %1.==. (
   echo Usage: mkproj [options] ^<project name^>
   echo. 
+  echo The slash ^(/^) can be replaced by a dash ^(-^), but they cannot be mixed.
+  echo ^(All options must use either the slash or the dash^)
+  echo.
   echo Project type options:
   echo.  /c       - Generate a C/C++ project
   echo.  /py      - Generate a Python project
@@ -43,6 +46,11 @@ if %1.==. (
   goto :Terminate
 )
 
+set firstarg=%1
+set switch=%firstarg:~0,1%
+
+if %switch% NEQ / if %switch% NEQ - set switch=/
+
 set name=
 set type=
 
@@ -78,49 +86,49 @@ for /f "eol=# tokens=*" %%l in (%AppData%\qeaml\mkproj\config.txt) do (
 
 for %%a in (%*) do (
   @REM Project types
-  if %%a==/c (
+  if %%a==%switch%c (
     set type=C
-  ) else if %%a==/py (
+  ) else if %%a==%switch%py (
     set type=Python
-  ) else if %%a==/js (
+  ) else if %%a==%switch%js (
     set type=JS
   
   @REM Git-related
-  ) else if %%a==/nogit (
+  ) else if %%a==%switch%nogit (
     set git=no
 
   @REM Language-specific
-  ) else if %%a==/novenv (
+  ) else if %%a==%switch%novenv (
     set venv=no
-  ) else if %%a==/nonpm (
+  ) else if %%a==%switch%nonpm (
     set npm=no
-  ) else if %%a==/cl (
+  ) else if %%a==%switch%cl (
     set build=cl
-  ) else if %%a==/clang (
+  ) else if %%a==%switch%clang (
     set build=clang
-  ) else if %%a==/gcc (
+  ) else if %%a==%switch%gcc (
     set build=gcc
 
   @REM Licenses
-  ) else if %%a==/bsd3 (
+  ) else if %%a==%switch%bsd3 (
     set license=bsd3
-  ) else if %%a==/mit (
+  ) else if %%a==%switch%mit (
     set license=mit
   
   @REM Overrides
-  ) else if %%a==/edit (
+  ) else if %%a==%switch%edit (
     set edit=yes
-  ) else if %%a==/force (
+  ) else if %%a==%switch%force (
     set force=yes
-  ) else if %%a==/v (
+  ) else if %%a==%switch%v (
     set verbose=yes
-  ) else if %%a==/update (
+  ) else if %%a==%switch%update (
     set update=yes
   
   @REM Editors
-  ) else if %%a==/codium (
+  ) else if %%a==%switch%codium (
     set editor=codium
-  ) else if %%a==/code (
+  ) else if %%a==%switch%code (
     set editor=code
   
   @REM Default - project name
